@@ -69,6 +69,9 @@ import com.example.realestate.ui.theme.screens.property.bottomNavItems
 @Composable
 fun IntentScreen(navController: NavController){
 
+    Column (modifier = Modifier.fillMaxSize()){
+
+
     var selected by remember { mutableIntStateOf(0) }
     Scaffold(
         bottomBar = {
@@ -108,7 +111,7 @@ fun IntentScreen(navController: NavController){
             }
         },
         topBar = {
-            TopAppBar(title = { Text(text = "PropertyPlus") },
+            TopAppBar(title = { Text(text = "MagicBricks") },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(Color.Red),)
         },
 
@@ -130,219 +133,17 @@ fun IntentScreen(navController: NavController){
 
                 ){
 
-
-                //Start of Row
-                Row {
-                    //card one
-                    Card(modifier = Modifier
-                        .height(180.dp)
-                        .width(200.dp)) {
-                        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-                            Image(
-                                painter = painterResource(id = R.drawable.img_7),
-                                contentDescription = "img_7",
-                                modifier = Modifier.fillMaxSize(),
-                                contentScale = ContentScale.Crop
-                            )
-                            Icon(imageVector = Icons.Default.Favorite,
-                                contentDescription = "favourite",
-                                modifier = Modifier
-                                    .align(Alignment.TopStart)
-                                    .padding(10.dp),
-                                tint = Color.LightGray
-
-                                )
-                        }
-                    }
-                    //card end
-                    Column (modifier = Modifier.padding(start = 20.dp)){
-                        Text(text = "Visit Lavington", fontSize = 20.sp)
-                        Text(text = "The best property you can find")
-                        Row {
-                            Icon(imageVector = Icons.Default.Star, contentDescription = "star", tint = Color.Black, modifier = Modifier.size(30.dp))
-                            Icon(imageVector = Icons.Default.Star, contentDescription = "star", tint = Color.Black, modifier = Modifier.size(30.dp))
-                            Icon(imageVector = Icons.Default.Star, contentDescription = "star", tint = Color.Black, modifier = Modifier.size(30.dp))
-                            Icon(imageVector = Icons.Default.Star, contentDescription = "star", tint = Color.Black, modifier = Modifier.size(30.dp))
-                            Icon(imageVector = Icons.Default.Star, contentDescription = "star", tint = Color.Black, modifier = Modifier.size(30.dp))
-                        }
-                        Text(text = "54,780 reviews")
-                        Button(onClick = { /*TODO*/ },
-                            colors = ButtonDefaults.buttonColors(Color.Red),
-                            shape = RoundedCornerShape(10.dp)
-
-                            ) {
-                            Text(text = "call")
-
-                        }
-
-                    }
-
-                }
-
-                //End of row
-                Spacer(modifier = Modifier.height(50.dp))
-
-                //Intents
-
-                //STK
-                val mContext = LocalContext.current
-                OutlinedButton(onClick ={
-                    val simToolKitLaunchIntent =
-                        mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
-                    simToolKitLaunchIntent?.let { mContext.startActivity(it) }
-
-                },
-                    modifier = Modifier
-                        .size(width = 380.dp, height = 70.dp)
-                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
-                    shape = CutCornerShape(5.dp),
-                    border = BorderStroke(3.dp, Color.Black)
-                ) {
-                    Text(text = "PAY VIA MPESA")
-
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                //EMAIL
-                Button(onClick = {
-                    val shareIntent = Intent(Intent.ACTION_SEND)
-                    shareIntent.type = "text/plain"
-                    shareIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("akinyiglory2@gmail.com"))
-                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "subject")
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, "Hello, this is the email body")
-                    mContext.startActivity(shareIntent)
-                },
-                    modifier = Modifier
-                        .size(width = 380.dp, height = 70.dp)
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
-                    shape = CutCornerShape(5.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
-                ) {
-                    Text(text = "EMAIL")
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                //SHARE
-                Button(onClick = {
-                    val shareIntent=Intent(Intent.ACTION_SEND)
-                    shareIntent.type="text/plain"
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this is a cool content")
-                    mContext.startActivity(Intent.createChooser(shareIntent, "Share"))
-                },
-                    modifier = Modifier
-                        .size(width = 380.dp, height = 70.dp)
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
-                    shape = CutCornerShape(5.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
-                ) {
-                    Text(text = "SHARE")
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-
-                //CALL
-                Button(onClick = {
-                    val callIntent=Intent(Intent.ACTION_DIAL)
-                    callIntent.data="tel:0720245837".toUri()
-                    mContext.startActivity(callIntent)
-                },
-                    modifier = Modifier
-                        .size(width = 380.dp, height = 70.dp)
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
-                    shape = CutCornerShape(5.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
-                ) {
-                    Text(text = "CALL")
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                //SMS
-                Button(onClick = {
-                    val smsIntent=Intent(Intent.ACTION_SENDTO)
-                    smsIntent.data="smsto:0720245837".toUri()
-                    smsIntent.putExtra("sms_body","Hello Glory,how was your day?")
-                    mContext.startActivity(smsIntent)
-                },
-                    modifier = Modifier
-                        .size(width = 380.dp, height = 70.dp)
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
-                    shape = CutCornerShape(5.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
-                ) {
-                    Text(text = "SMS")
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                //CALL
-                Button(onClick = {
-                    val callIntent=Intent(Intent.ACTION_DIAL)
-                    callIntent.data="tel:0720245837".toUri()
-                    mContext.startActivity(callIntent)
-                },
-                    modifier = Modifier
-                        .size(width = 380.dp, height = 70.dp)
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
-                    shape = CutCornerShape(5.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
-                ) {
-                    Text(text = "CALL")
-                }
-
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                //CAMERA
-                Button(onClick = {
-                    val cameraIntent= Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    if (cameraIntent.resolveActivity(mContext.packageManager)!=null){
-                        mContext.startActivity(cameraIntent)
-                    }else{
-                        println("Camera app is not available")
-                    }
-                },
-                    modifier = Modifier
-                        .size(width = 380.dp, height = 70.dp)
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, top = 10.dp),
-                    shape = CutCornerShape(5.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
-                ) {
-                    Text(text = "CAMERA")
-                }
-
-
-                //CAMERA
-                Button(onClick = {
-
-                },
-                    modifier = Modifier
-                        .size(width = 380.dp, height = 70.dp)
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
-                    shape = CutCornerShape(5.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
-                ) {
-                    Text(text = "MAP")
-                }
-
-
             }
+
+
+
 
         }
 
     )
 
 
+}
 }
 
 val bottomNavItems = listOf(
