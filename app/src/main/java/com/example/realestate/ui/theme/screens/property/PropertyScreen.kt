@@ -5,6 +5,7 @@ import android.content.Intent
 import android.provider.MediaStore
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,8 +17,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Face
@@ -69,7 +72,8 @@ import com.example.realestate.R
 @Composable
 fun PropertyScreen(navController: NavController){
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier
+        .fillMaxSize()) {
 
 
         var selected by remember { mutableIntStateOf(0) }
@@ -115,7 +119,6 @@ fun PropertyScreen(navController: NavController){
                     colors = TopAppBarDefaults.mediumTopAppBarColors(Color.Red),)
             },
 
-
             floatingActionButton = {
                 FloatingActionButton(onClick = { /*TODO*/ }) {
                     IconButton(onClick = { /*TODO*/ }) {
@@ -124,10 +127,13 @@ fun PropertyScreen(navController: NavController){
                     }
                 }
             },
+
             //Content Section
             content = @Composable{
                 Column(
                     modifier = Modifier
+                        .horizontalScroll(rememberScrollState())
+                        .verticalScroll(rememberScrollState())
                         .fillMaxSize()
                         .padding(top=80.dp),
 
@@ -185,7 +191,7 @@ fun PropertyScreen(navController: NavController){
                     }
 
                     //End of row
-                    Spacer(modifier = Modifier.height(50.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     //Intents
 
@@ -207,7 +213,7 @@ fun PropertyScreen(navController: NavController){
 
                     }
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     //EMAIL
                     Button(onClick = {
@@ -228,7 +234,7 @@ fun PropertyScreen(navController: NavController){
                         Text(text = "EMAIL")
                     }
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     //SHARE
                     Button(onClick = {
@@ -247,7 +253,7 @@ fun PropertyScreen(navController: NavController){
                         Text(text = "SHARE")
                     }
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
 
                     //CALL
@@ -266,7 +272,7 @@ fun PropertyScreen(navController: NavController){
                         Text(text = "CALL")
                     }
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     //SMS
                     Button(onClick = {
@@ -285,7 +291,7 @@ fun PropertyScreen(navController: NavController){
                         Text(text = "SMS")
                     }
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     //CALL
                     Button(onClick = {
@@ -304,7 +310,7 @@ fun PropertyScreen(navController: NavController){
                     }
 
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     //CAMERA
                     Button(onClick = {
