@@ -29,10 +29,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.realestate.R
+import com.example.realestate.data.AuthViewModel
 import com.example.realestate.navigation.ROUT_DETAIL
 import com.example.realestate.navigation.ROUT_SIGNUP
 
@@ -110,13 +113,17 @@ fun LoginScreen(navController: NavController){
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
             leadingIcon ={ Icon(imageVector = Icons.Default.Lock, contentDescription = "person", tint = Color.Black) },
+            visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             placeholder = { Text(text = "Password")}
         )
 
         Spacer(modifier = Modifier.height(20.dp))
+        val context = LocalContext.current
+        val authViewModel = AuthViewModel(navController, context)
 
-        Button(onClick = { navController.navigate(ROUT_DETAIL) },
+
+        Button(onClick = { authViewModel.login(email, password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 100.dp, end = 100.dp)
