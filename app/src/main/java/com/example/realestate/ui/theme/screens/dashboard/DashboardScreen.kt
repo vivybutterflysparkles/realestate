@@ -16,17 +16,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,13 +36,13 @@ import com.example.realestate.navigation.ROUT_HOME
 import com.example.realestate.navigation.ROUT_SIGNUP
 import com.example.realestate.navigation.VIEW_PRODUCTS_URL
 import com.example.realestate.ui.theme.PurpleGrey80
-import com.example.realestate.ui.theme.lightpink
-import com.example.realestate.ui.theme.lightred
 
 @Composable
 fun DashboardScreen(navController: NavController){
 
-    Column(modifier = Modifier.fillMaxSize(),
+    Column(modifier = Modifier
+        .verticalScroll(rememberScrollState())
+        .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally) {
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -232,6 +228,84 @@ fun DashboardScreen(navController: NavController){
 
                 }
                 //end of row 1
+
+                //row 1
+                Row(modifier = Modifier.padding(20.dp)) {
+
+                    //card 1
+                    Card(modifier = Modifier
+                        .clickable { navController.navigate(ROUT_SIGNUP) }
+                        .width(160.dp)
+                        .height(180.dp),
+                        elevation = CardDefaults.cardElevation(30.dp)) {
+
+                        Column {
+
+                            Spacer(modifier = Modifier.height(15.dp))
+
+                            Box(modifier = Modifier
+                                .fillMaxWidth(),
+                                contentAlignment = Alignment.Center ){
+
+                                Image(painter = painterResource(id = R.drawable.img_12),
+                                    contentDescription ="",
+                                    modifier = Modifier.size(100.dp) )
+                            }
+
+                            Spacer(modifier = Modifier.height(15.dp))
+
+                            Text(
+                                text = "ACCOUNT",
+                                fontSize = 18.sp,
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center
+
+                            )
+
+                        }
+
+                    }
+                    //end of card
+
+                    Spacer(modifier = Modifier.width(30.dp))
+
+                    //card 2
+                    Card(modifier = Modifier
+                        .width(160.dp)
+                        .height(180.dp),
+                        elevation = CardDefaults.cardElevation(30.dp)) {
+
+                        Column {
+
+                            Spacer(modifier = Modifier.height(15.dp))
+
+                            Box(modifier = Modifier
+                                .fillMaxWidth(),
+                                contentAlignment = Alignment.Center ){
+
+                                Image(painter = painterResource(id = R.drawable.img_13),
+                                    contentDescription ="",
+                                    modifier = Modifier.size(100.dp) )
+                            }
+
+                            Spacer(modifier = Modifier.height(15.dp))
+
+                            Text(
+                                text = "SETTINGS",
+                                fontSize = 18.sp,
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center
+
+                            )
+
+                        }
+
+                    }
+                    //end of card
+
+                }
+                //end of row 1
+
 
                 //row 1
                 Row(modifier = Modifier.padding(20.dp)) {

@@ -45,6 +45,7 @@ fun SplashScreen(navController: NavController){
             delay(1000)
             navController.navigate(ROUT_DASHBOARD)
 
+
         }
 
         //Lottie Animation
